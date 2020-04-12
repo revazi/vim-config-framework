@@ -50,16 +50,16 @@ endif
 " Try to fix issue where netrw is open and opened buffer not writable
 " (requiring :set bt=): https://github.com/tpope/vim-vinegar/issues/13
 autocmd FileType netrw setl bufhidden=delete
-let g:netrw_liststyle = 3
+let g:netrw_liststyle = 4
 
 " 1 - open files in a new horizontal split
 " 2 - open files in a new vertical split
 " 3 - open files in a new tab
 " 4 - open in previous window
-let g:netrw_browse_split = 1
+" let g:netrw_browse_split = 1
 
 " Set the width of the netrw pane
-let g:netrw_winsize = 20
+" let g:netrw_winsize = 20
 
 " Open netrw vertically on vim enter
 " augroup ProjectDrawer
