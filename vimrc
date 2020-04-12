@@ -55,7 +55,6 @@ let g:netrw_liststyle = 4
 " 2 - open files in a new vertical split
 " 3 - open files in a new tab
 " 4 - open in previous window
-"
 " let g:netrw_browse_split = 1
 
 " Set the width of the netrw pane
