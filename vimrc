@@ -67,10 +67,10 @@ let g:netrw_liststyle = 4
 " augroup END
 
 " Resize vim split
-noremap <silent> <C-S-Left> :vertical resize +5<CR>
-noremap <silent> <C-S-Right> :vertical resize -5<CR>
-noremap <silent> <C-S-Up> :resize +5<CR>
-noremap <silent> <C-S-Down> :resize -5<CR>
+" noremap <silent> <C-S-Left> :vertical resize +5<CR>
+" noremap <silent> <C-S-Right> :vertical resize -5<CR>
+" noremap <silent> <C-S-Up> :resize +5<CR>
+" noremap <silent> <C-S-Down> :resize -5<CR>
 
 "  Truecolor
 set termguicolors
