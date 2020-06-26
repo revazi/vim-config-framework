@@ -19,7 +19,10 @@
   "coc.preferences.useQuickfixForLocations": true,
   "coc.preferences.jumpCommand": "vsp",
   "coc.preferences.rootPatterns": [".git", ".hg", "pyproject.toml", "setup.py", ".venv", ".env", "package.json"],
-  "diagnostic.locationlist": false,
+  "diagnostic.messageTarget": "echo",
+  "signature.target": "echo",
+  "suggest.floatEnable": false,
+  "coc.preferences.hoverTarget": "echo",
   "coc.preferences.formatOnSaveFiletypes": [],
   "coc.source.tmuxcomplete.filetypes": [],
   "coc.source.buffer.enable": false,
@@ -31,5 +34,6 @@
   "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": false,
   "python.venvFolders": ["envs", ".pyenv", ".env", ".venv", ".venv3", ".direnv"],
-  "python.venvPath": "~/.local/share/virtualenvs"
+  "python.venvPath": "~/.local/share/virtualenvs",
+  "npm.binPath": "yarn"
 }

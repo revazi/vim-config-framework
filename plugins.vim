@@ -60,10 +60,10 @@ Plug 'gruvbox-material/vim', {'as': 'gruvbox-material'}
 
 Plug 'Rykka/riv.vim'
 
-"" CocInstall coc-json coc-html coc-css coc-python coc-eslint coc-tsserver coc-prettier coc-tslint coc-tslint-plugin
+"" CocInstall coc-json coc-html coc-css coc-python coc-eslint coc-tsserver coc-tslint-plugin
 let g:coc_global_extensions = [
   \ 'coc-json', 'coc-html', 'coc-css', 'coc-python',
-  \ 'coc-eslint', 'coc-tsserver', 'coc-tslint', 'coc-tslint-plugin', 'coc-prettier'
+  \ 'coc-eslint', 'coc-tsserver',
   \ ]
 
 function! OnLoadCoc()
@@ -82,6 +82,8 @@ function! OnLoadCoc()
   inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
   " Remap keys for gotos
+  nmap <F12> <Plug>(coc-definition)
+  nmap <C-F12> <Plug>(coc-type-definition)
   nmap <silent> gd <Plug>(coc-definition)
   nmap <silent> <leader>g <Plug>(coc-definition)
   nmap <silent> gy <Plug>(coc-type-definition)
@@ -102,30 +104,24 @@ let g:rainbow_active = 1
 Plug 'frazrepo/vim-rainbow'
 
 if executable('black')
-  Plug 'psf/black', { 'tag': '19.10b0' }
-  autocmd BufWritePre *.py execute ':Black'
-  " https://github.com/ambv/black/issues/414
-  let g:black_skip_string_normalization = 1
+  autocmd BufWritePost *.py silent !black % --quiet
 endif
 
 if executable('isort')
-  " isort not being found: https://github.com/fisadev/vim-isort/issues/29
-  Plug 'fisadev/vim-isort'
-  autocmd BufWritePre *.py execute ':Isort'
-
-  " https://github.com/neoclide/coc.nvim/issues/888
-  " Had issues with this overriting buffer
-  " command! -nargs=0 OR :call CocAction('runCommand', 'editor.action.organizeImport')
-  " autocmd BufWritePre *.py :OR
+  autocmd BufWritePost *.py silent !isort % --quiet
 endif
 
 if executable('node')
   " post install (yarn install | npm install) then load plugin only for editing supported files
   Plug 'prettier/vim-prettier', {
     \ 'do': 'yarn install',
-    \ 'for': ['javascript', 'typescript', 'vue'] }
+    \ 'for': ['javascript', 'typescript', 'vue', 'markdown', 'markdown.mdx'] }
 
-  autocmd BufWritePre *.ts,*.tsx,*.js,*.jsx execute ':Prettier'
+  autocmd BufWritePre *.md,*.mdx,*.ts,*.tsx,*.js,*.jsx execute ':Prettier'
+endif
+
+if executable('bibtex-tidy')  " Tested with bibtex-tidy at 1.3.1
+  autocmd BufWritePost *.bib silent !bibtex-tidy % --quiet --no-backup
 endif
 
 Plug 'jparise/vim-graphql'
@@ -136,6 +132,7 @@ if executable('node')
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
   Plug 'posva/vim-vue'
+  Plug 'jxnblk/vim-mdx-js'
 endif
 
 if executable('tmux')
