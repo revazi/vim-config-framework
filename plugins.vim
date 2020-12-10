@@ -8,6 +8,7 @@ Plug 'editorconfig/editorconfig-vim'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+" Plug 'francoiscabrol/ranger.vim'
 
 if executable('pipenv')
   Plug 'cespare/vim-toml'
@@ -59,8 +60,17 @@ Plug 'gruvbox-material/vim', {'as': 'gruvbox-material'}
 "" CocInstall coc-json coc-html coc-css coc-python coc-eslint coc-tsserver coc-tslint-plugin
 let g:coc_global_extensions = [
   \ 'coc-json', 'coc-html', 'coc-css', 'coc-python',
-  \ 'coc-tsserver', 'coc-rls'
+  \ 'coc-tsserver', 'coc-rls', 
+  \ 'coc-prettier', 'coc-eslint'
   \ ]
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/prettier')
+  let g:coc_global_extensions += ['coc-prettier']
+endif
+
+if isdirectory('./node_modules') && isdirectory('./node_modules/eslint')
+  let g:coc_global_extensions += ['coc-eslint']
+endif
 
 function! OnLoadCoc()
   " use <tab> for trigger completion and navigate next complete item
@@ -86,6 +96,12 @@ function! OnLoadCoc()
   nmap <silent> <leader>G <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> [g <Plug>(coc-diagnostic-prev)
+  nmap <silent> ]g <Plug>(coc-diagnostic-next)
+  nnoremap <silent> <space>d :<C-u>CocList diagnostics<cr>
+  nnoremap <silent> <space>s :<C-u>CocList -I symbols<cr>
+  nmap <leader>do <Plug>(coc-codeaction)
+  nmap <leader>rn <Plug>(coc-rename)
 endfunction
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -125,10 +141,12 @@ Plug 'jparise/vim-graphql'
 Plug 'cakebaker/scss-syntax.vim'
 
 if executable('node')
+  Plug 'styled-components/vim-styled-components', { 'branch': 'main' }
   Plug 'leafgarland/typescript-vim'
   Plug 'peitalin/vim-jsx-typescript'
   Plug 'posva/vim-vue'
   Plug 'jxnblk/vim-mdx-js'
+  Plug 'pangloss/vim-javascript'
 endif
 
 if executable('tmux')
@@ -144,3 +162,4 @@ if executable('poetry')
 
   Plug 'petobens/poet-v'
 endif
+

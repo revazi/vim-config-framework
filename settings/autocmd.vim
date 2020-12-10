@@ -14,6 +14,17 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
+function! ShowDocIfNoDiagnostic(timer_id)
+  if (coc#float#has_float() == 0)
+    silent call CocActionAsync('doHover')
+  endif
+endfunction
+
+function! s:show_hover_doc()
+  call timer_start(500, 'ShowDocIfNoDiagnostic')
+endfunction
+
+
 " Set augroup
 augroup MyAutoCmd
   autocmd!
@@ -55,6 +66,8 @@ autocmd FileType python setlocal expandtab shiftwidth=4 tabstop=4 smartindent ci
 autocmd FileType html,xhtml,xml,htmldjango,jinja.html,jinja,eruby,mako setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 autocmd BufNewFile,BufRead *.tmpl,*.jinja,*.jinja2 setlocal ft=jinja.html
 autocmd BufNewFile,BufRead *.py_tmpl setlocal ft=python
+autocmd BufEnter *.{js,jsx,ts,tsx} :syntax sync fromstart
+autocmd BufLeave *.{js,jsx,ts,tsx} :syntax sync clear
 
 autocmd FileType css,scss,less setlocal expandtab shiftwidth=2 tabstop=2 softtabstop=2
 
@@ -69,3 +82,7 @@ autocmd FileType yaml setlocal expandtab shiftwidth=2 tabstop=8 softtabstop=2
 autocmd FileType lua setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType markdown setlocal textwidth=80
 autocmd FileType rust setlocal expandtab shiftwidth=4 tabstop=8 softtabstop=4
+
+" Show documentation for the word under the cursor
+autocmd CursorHoldI * :call <SID>show_hover_doc()
+autocmd CursorHold * :call <SID>show_hover_doc()

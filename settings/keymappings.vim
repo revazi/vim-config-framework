@@ -126,6 +126,7 @@ xmap <Tab> >
 xmap <s-tab> <
 
 noremap <leader>x :Ex<CR>
+noremap <leader>r : RangerWorkingDirectory<CR>
 
 " Buffer Traversal {{{
 nnoremap <silent> <Leader>d :BD<cr>
@@ -154,6 +155,7 @@ function! Set_netrw_maps()
     noremap <buffer> <C-l> <C-w>l
 endfunction
 
+nnoremap <silent> K :call CocAction('doHover')<CR>
 
 nnoremap <C-=> <C-w>=
 

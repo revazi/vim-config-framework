@@ -1,4 +1,4 @@
-" http://stackoverflow.com/questions/9990219/vim-whats-the-difference-between-let-and-set
+" http://stackoverflow.com/questions/9990221/vim-whats-the-difference-between-let-and-set
 " Borrows from https://github.com/terryma/dotfiles/blob/master/.vimrc
 " Borrows from https://github.com/klen/.vim
 
@@ -10,6 +10,10 @@ let g:ale_set_quickfix = 1
 let g:ale_list_window_size = 5  " Show 5 lines of errors (default: 10)
 let g:ale_lint_on_text_changed = 'never'  " Remove lag
 let g:ale_lint_on_enter = 0  " no linting on entering file let g:ale_linters = {'html': []}
+
+" Ranger
+" let g:ranger_command_override = 'ranger --cmd "set show_hidden=true"'
+" let g:ranger_replace_netrw = 1
 
 " Allow switching away from unsaved buffers
 " Or else FZF and :e will fail if moving away from buffer
